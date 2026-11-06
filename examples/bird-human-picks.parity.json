@@ -445,6 +445,140 @@
      "pattern": "class=\"note\""
     }
    ]
+  },
+  {
+   "id": "data-standard",
+   "title": "数据集达到花叔 data/ 的字段标准",
+   "from": "huashu-bird-sticker data/：species.json、species.csv、names.csv、languages.json、field-guide、字段表写明来源和覆盖数",
+   "checks": [
+    {
+     "type": "exists",
+     "path": "data/species.json"
+    },
+    {
+     "type": "exists",
+     "path": "data/species.csv"
+    },
+    {
+     "type": "exists",
+     "path": "data/names.csv"
+    },
+    {
+     "type": "exists",
+     "path": "data/languages.json"
+    },
+    {
+     "type": "exists",
+     "path": "data/field-guide.zh-Hans.json"
+    },
+    {
+     "type": "exists",
+     "path": "data/coverage.json"
+    },
+    {
+     "type": "exists",
+     "path": "data/README.md"
+    },
+    {
+     "type": "count",
+     "glob": "docs/birds/*/index.html",
+     "at_least_rows_of": "data/species.csv"
+    },
+    {
+     "type": "contains",
+     "path": "data/README.md",
+     "pattern": "\\| Field \\| What it is \\| Source \\| Coverage \\|"
+    },
+    {
+     "type": "contains",
+     "path": "data/README.md",
+     "pattern": "## Sources"
+    },
+    {
+     "type": "contains",
+     "path": "data/species.json",
+     "pattern": "\"huashuData\": \\{\\s*\"version\""
+    }
+   ]
+  },
+  {
+   "id": "photo-provenance",
+   "title": "每张照片都有来源页、尺寸、授权、授权链接和认定证据",
+   "from": "花叔每张贴纸都记录 reference 的页面、作者和授权",
+   "checks": [
+    {
+     "type": "json",
+     "path": "data/coverage.json",
+     "key": "count",
+     "op": "ge",
+     "value": 1209
+    },
+    {
+     "type": "contains",
+     "path": "data/coverage.json",
+     "pattern": "\"photo.page\": 1209"
+    },
+    {
+     "type": "contains",
+     "path": "data/coverage.json",
+     "pattern": "\"photo.url\": 1209"
+    },
+    {
+     "type": "contains",
+     "path": "data/coverage.json",
+     "pattern": "\"photo.width\": 1209"
+    },
+    {
+     "type": "contains",
+     "path": "data/coverage.json",
+     "pattern": "\"photo.height\": 1209"
+    },
+    {
+     "type": "contains",
+     "path": "data/coverage.json",
+     "pattern": "\"photo.authorUrl\": 1209"
+    },
+    {
+     "type": "contains",
+     "path": "data/coverage.json",
+     "pattern": "\"photo.license\": 1209"
+    },
+    {
+     "type": "contains",
+     "path": "data/coverage.json",
+     "pattern": "\"photo.licenseUrl\": 1209"
+    },
+    {
+     "type": "contains",
+     "path": "data/coverage.json",
+     "pattern": "\"photo.observation\": 1209"
+    },
+    {
+     "type": "contains",
+     "path": "data/coverage.json",
+     "pattern": "\"evidence.agreeingIdentifiers\": 1209"
+    },
+    {
+     "type": "contains",
+     "path": "data/coverage.json",
+     "pattern": "\"evidence.identificationMonths\": 1209"
+    },
+    {
+     "type": "contains",
+     "path": "data/coverage.json",
+     "pattern": "\"checks.framing\": 1209"
+    },
+    {
+     "type": "contains",
+     "path": "data/coverage.json",
+     "pattern": "\"checks.eyeCheck\": 1209"
+    },
+    {
+     "type": "contains",
+     "path": "data/coverage.json",
+     "pattern": "\"ids.inaturalist\": 1209"
+    }
+   ]
   }
  ],
  "manual": [

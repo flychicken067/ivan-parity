@@ -17,7 +17,7 @@ python3 scripts/parity_check.py parity.json --out PARITY.md
 
 输出一张表：每项 PASS / FAIL / UNKNOWN 和证据。全部通过时退出码为 0。
 
-清单写法、检查类型和工作规则见 [SKILL.md](SKILL.md)。示例：[人选鸟图对标花叔 birdalbum.com](examples/bird-human-picks.parity.json)，10 项全部通过的检查结果见 [bird-human-picks/PARITY.md](https://github.com/flychicken067/bird-human-picks/blob/main/PARITY.md)。
+清单写法、检查类型和工作规则见 [SKILL.md](SKILL.md)。示例：[人选鸟图对标花叔 birdalbum.com](examples/bird-human-picks.parity.json)，12 项全部通过的检查结果见 [bird-human-picks/PARITY.md](https://github.com/flychicken067/bird-human-picks/blob/main/PARITY.md)。
 
 ## 授权
 

@@ -52,4 +52,4 @@ description: 对标监督：把“我们和对标产品差在哪”写成一张�
 
 ## 示例
 
-`examples/bird-human-picks.parity.json` 是人选鸟图对标花叔 birdalbum.com 的清单，共 10 项。
+`examples/bird-human-picks.parity.json` 是人选鸟图对标花叔 birdalbum.com 的清单，共 12 项。
