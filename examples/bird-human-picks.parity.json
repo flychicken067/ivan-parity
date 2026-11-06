@@ -1,0 +1,456 @@
+{
+ "title": "人选鸟图 对标花叔 birdalbum.com",
+ "benchmark": "https://birdalbum.com（2026-11-06 抓取首页、关于、贴纸制作、普通翠鸟页、插图页）",
+ "items": [
+  {
+   "id": "report-link",
+   "title": "每种鸟都有报错入口，自动填好鸟名",
+   "from": "birdalbum 每个物种页都有 Report a mistake on GitHub，鸟名已填好",
+   "checks": [
+    {
+     "type": "each",
+     "glob": "docs/birds/*/index.html",
+     "pattern": "issues/new\\?template=wrong-photo\\.yml&amp;title=%5Bphoto%5D%20[A-Z]"
+    },
+    {
+     "type": "contains",
+     "path": "docs/assets/site.js",
+     "pattern": "issues/new\\?"
+    },
+    {
+     "type": "exists",
+     "path": ".github/ISSUE_TEMPLATE/wrong-photo.yml"
+    }
+   ]
+  },
+  {
+   "id": "headline",
+   "title": "标题和开头一句话说清是什么，不用内部叫法",
+   "from": "birdalbum: Every bird on Earth, one sticker each.",
+   "checks": [
+    {
+     "type": "contains",
+     "path": "docs/index.html",
+     "pattern": "<title>人选鸟图 · 每种鸟一张真实照片"
+    },
+    {
+     "type": "contains",
+     "path": "docs/index.html",
+     "pattern": "<h1>每种鸟一张真实照片"
+    },
+    {
+     "type": "absent",
+     "path": "docs/index.html",
+     "pattern": "人选精选|约为花叔|1/9|Claude|eye-check|AviList"
+    },
+    {
+     "type": "none",
+     "glob": "docs/*/index.html",
+     "pattern": "人选精选|约为花叔|1/9|Claude"
+    }
+   ]
+  },
+  {
+   "id": "meta",
+   "title": "每页都有摘要、分享图、图标和规范网址",
+   "from": "birdalbum 每页有 description、og:image、favicon、canonical",
+   "checks": [
+    {
+     "type": "each",
+     "glob": "docs/**/index.html",
+     "pattern": "<meta name=\"description\" content=\"[^\"]{20,}"
+    },
+    {
+     "type": "each",
+     "glob": "docs/**/index.html",
+     "pattern": "<meta property=\"og:image\" content=\"https://"
+    },
+    {
+     "type": "each",
+     "glob": "docs/**/index.html",
+     "pattern": "rel=\"icon\""
+    },
+    {
+     "type": "each",
+     "glob": "docs/**/index.html",
+     "pattern": "rel=\"canonical\""
+    },
+    {
+     "type": "exists",
+     "path": "docs/assets/og.png"
+    },
+    {
+     "type": "exists",
+     "path": "docs/assets/favicon.png"
+    }
+   ]
+  },
+  {
+   "id": "cite-optout",
+   "title": "有现成的引用文字和摄影师撤回渠道",
+   "from": "birdalbum: How to credit；photographer opt-out within 7 days",
+   "checks": [
+    {
+     "type": "each",
+     "glob": "docs/birds/*/index.html",
+     "pattern": "class=\"cite\""
+    },
+    {
+     "type": "contains",
+     "path": "docs/method/index.html",
+     "pattern": "我是摄影师"
+    },
+    {
+     "type": "contains",
+     "path": "docs/en/method/index.html",
+     "pattern": "photographer"
+    },
+    {
+     "type": "exists",
+     "path": ".github/ISSUE_TEMPLATE/photographer-opt-out.yml"
+    }
+   ]
+  },
+  {
+   "id": "default-ours",
+   "title": "默认只显示我们的照片，对比是可选项",
+   "from": "birdalbum 是产品页，不是对比页",
+   "checks": [
+    {
+     "type": "contains",
+     "path": "docs/index.html",
+     "pattern": "<input id=\"cmp\" type=\"checkbox\">"
+    },
+    {
+     "type": "each",
+     "glob": "docs/birds/*/index.html",
+     "pattern": "<details class=\"compare\">"
+    }
+   ]
+  },
+  {
+   "id": "fresh",
+   "title": "对比用的是花叔最新的数据",
+   "from": "花叔数据持续更新（2.2.6 起重画贴纸）",
+   "checks": [
+    {
+     "type": "upstream",
+     "repo": "alchaincyf/huashu-bird-sticker",
+     "path": "data/species.json",
+     "local_json": "docs/site-stats.json",
+     "key": "huashu_commit"
+    }
+   ]
+  },
+  {
+   "id": "species-pages",
+   "title": "每种入选鸟都有独立页面",
+   "from": "birdalbum 每种鸟一个网址",
+   "checks": [
+    {
+     "type": "count",
+     "glob": "docs/birds/*/index.html",
+     "at_least_rows_of": "docs/picks.csv"
+    }
+   ]
+  },
+  {
+   "id": "species-content",
+   "title": "物种页有体型、保护等级、分布和其他语言名字",
+   "from": "birdalbum 物种页：size、IUCN、range、names",
+   "checks": [
+    {
+     "type": "each",
+     "glob": "docs/birds/*/index.html",
+     "pattern": "IUCN",
+     "min_ratio": 0.9
+    },
+    {
+     "type": "each",
+     "glob": "docs/birds/*/index.html",
+     "pattern": "<h2>体型</h2>",
+     "min_ratio": 0.9
+    },
+    {
+     "type": "each",
+     "glob": "docs/birds/*/index.html",
+     "pattern": "<h2>分布</h2>",
+     "min_ratio": 0.95
+    },
+    {
+     "type": "each",
+     "glob": "docs/birds/*/index.html",
+     "pattern": "<h2>其他语言的名字</h2>",
+     "min_ratio": 0.95
+    }
+   ]
+  },
+  {
+   "id": "languages",
+   "title": "15 种语言，每种语言都有首页、方法页和全部物种页",
+   "from": "birdalbum 有 15 种语言",
+   "checks": [
+    {
+     "type": "exists",
+     "path": "docs/en/index.html"
+    },
+    {
+     "type": "exists",
+     "path": "docs/en/method/index.html"
+    },
+    {
+     "type": "count",
+     "glob": "docs/en/birds/*/index.html",
+     "at_least_rows_of": "docs/picks.csv"
+    },
+    {
+     "type": "exists",
+     "path": "docs/zh-hant/index.html"
+    },
+    {
+     "type": "exists",
+     "path": "docs/zh-hant/method/index.html"
+    },
+    {
+     "type": "count",
+     "glob": "docs/zh-hant/birds/*/index.html",
+     "at_least_rows_of": "docs/picks.csv"
+    },
+    {
+     "type": "exists",
+     "path": "docs/ja/index.html"
+    },
+    {
+     "type": "exists",
+     "path": "docs/ja/method/index.html"
+    },
+    {
+     "type": "count",
+     "glob": "docs/ja/birds/*/index.html",
+     "at_least_rows_of": "docs/picks.csv"
+    },
+    {
+     "type": "exists",
+     "path": "docs/ko/index.html"
+    },
+    {
+     "type": "exists",
+     "path": "docs/ko/method/index.html"
+    },
+    {
+     "type": "count",
+     "glob": "docs/ko/birds/*/index.html",
+     "at_least_rows_of": "docs/picks.csv"
+    },
+    {
+     "type": "exists",
+     "path": "docs/de/index.html"
+    },
+    {
+     "type": "exists",
+     "path": "docs/de/method/index.html"
+    },
+    {
+     "type": "count",
+     "glob": "docs/de/birds/*/index.html",
+     "at_least_rows_of": "docs/picks.csv"
+    },
+    {
+     "type": "exists",
+     "path": "docs/fr/index.html"
+    },
+    {
+     "type": "exists",
+     "path": "docs/fr/method/index.html"
+    },
+    {
+     "type": "count",
+     "glob": "docs/fr/birds/*/index.html",
+     "at_least_rows_of": "docs/picks.csv"
+    },
+    {
+     "type": "exists",
+     "path": "docs/es/index.html"
+    },
+    {
+     "type": "exists",
+     "path": "docs/es/method/index.html"
+    },
+    {
+     "type": "count",
+     "glob": "docs/es/birds/*/index.html",
+     "at_least_rows_of": "docs/picks.csv"
+    },
+    {
+     "type": "exists",
+     "path": "docs/pt-br/index.html"
+    },
+    {
+     "type": "exists",
+     "path": "docs/pt-br/method/index.html"
+    },
+    {
+     "type": "count",
+     "glob": "docs/pt-br/birds/*/index.html",
+     "at_least_rows_of": "docs/picks.csv"
+    },
+    {
+     "type": "exists",
+     "path": "docs/it/index.html"
+    },
+    {
+     "type": "exists",
+     "path": "docs/it/method/index.html"
+    },
+    {
+     "type": "count",
+     "glob": "docs/it/birds/*/index.html",
+     "at_least_rows_of": "docs/picks.csv"
+    },
+    {
+     "type": "exists",
+     "path": "docs/nl/index.html"
+    },
+    {
+     "type": "exists",
+     "path": "docs/nl/method/index.html"
+    },
+    {
+     "type": "count",
+     "glob": "docs/nl/birds/*/index.html",
+     "at_least_rows_of": "docs/picks.csv"
+    },
+    {
+     "type": "exists",
+     "path": "docs/ru/index.html"
+    },
+    {
+     "type": "exists",
+     "path": "docs/ru/method/index.html"
+    },
+    {
+     "type": "count",
+     "glob": "docs/ru/birds/*/index.html",
+     "at_least_rows_of": "docs/picks.csv"
+    },
+    {
+     "type": "exists",
+     "path": "docs/sv/index.html"
+    },
+    {
+     "type": "exists",
+     "path": "docs/sv/method/index.html"
+    },
+    {
+     "type": "count",
+     "glob": "docs/sv/birds/*/index.html",
+     "at_least_rows_of": "docs/picks.csv"
+    },
+    {
+     "type": "exists",
+     "path": "docs/da/index.html"
+    },
+    {
+     "type": "exists",
+     "path": "docs/da/method/index.html"
+    },
+    {
+     "type": "count",
+     "glob": "docs/da/birds/*/index.html",
+     "at_least_rows_of": "docs/picks.csv"
+    },
+    {
+     "type": "exists",
+     "path": "docs/pl/index.html"
+    },
+    {
+     "type": "exists",
+     "path": "docs/pl/method/index.html"
+    },
+    {
+     "type": "count",
+     "glob": "docs/pl/birds/*/index.html",
+     "at_least_rows_of": "docs/picks.csv"
+    }
+   ]
+  },
+  {
+   "id": "ai-translation-note",
+   "title": "AI 翻译的语言页标明未经逐句校对",
+   "from": "birdalbum: translated with AI assistance and spot-checked",
+   "checks": [
+    {
+     "type": "each",
+     "glob": "docs/zh-hant/index.html",
+     "pattern": "class=\"note\""
+    },
+    {
+     "type": "each",
+     "glob": "docs/ja/index.html",
+     "pattern": "class=\"note\""
+    },
+    {
+     "type": "each",
+     "glob": "docs/ko/index.html",
+     "pattern": "class=\"note\""
+    },
+    {
+     "type": "each",
+     "glob": "docs/de/index.html",
+     "pattern": "class=\"note\""
+    },
+    {
+     "type": "each",
+     "glob": "docs/fr/index.html",
+     "pattern": "class=\"note\""
+    },
+    {
+     "type": "each",
+     "glob": "docs/es/index.html",
+     "pattern": "class=\"note\""
+    },
+    {
+     "type": "each",
+     "glob": "docs/pt-br/index.html",
+     "pattern": "class=\"note\""
+    },
+    {
+     "type": "each",
+     "glob": "docs/it/index.html",
+     "pattern": "class=\"note\""
+    },
+    {
+     "type": "each",
+     "glob": "docs/nl/index.html",
+     "pattern": "class=\"note\""
+    },
+    {
+     "type": "each",
+     "glob": "docs/ru/index.html",
+     "pattern": "class=\"note\""
+    },
+    {
+     "type": "each",
+     "glob": "docs/sv/index.html",
+     "pattern": "class=\"note\""
+    },
+    {
+     "type": "each",
+     "glob": "docs/da/index.html",
+     "pattern": "class=\"note\""
+    },
+    {
+     "type": "each",
+     "glob": "docs/pl/index.html",
+     "pattern": "class=\"note\""
+    }
+   ]
+  }
+ ],
+ "manual": [
+  "手机宽度 375px 下，首页、物种页、方法页没有横向滚动",
+  "首页图片能加载，勾选“并排显示”后出现花叔贴纸",
+  "语言菜单能切到同一种鸟的其他语言页面"
+ ],
+ "changes": []
+}
