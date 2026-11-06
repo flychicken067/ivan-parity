@@ -579,6 +579,91 @@
      "pattern": "\"ids.inaturalist\": 1209"
     }
    ]
+  },
+  {
+   "id": "readme",
+   "title": "仓库介绍和花叔一样：11 种语言 README、头图、画廊、同样的章节",
+   "from": "huashu-bird-sticker README：11 种语言、头图、网站横幅、授权一句话、画廊、里面有什么、覆盖情况、质量、署名与撤下、怎么用、致谢",
+   "checks": [
+    {
+     "type": "exists",
+     "path": "README.md"
+    },
+    {
+     "type": "exists",
+     "path": "README.zh-Hans.md"
+    },
+    {
+     "type": "exists",
+     "path": "README.zh-Hant.md"
+    },
+    {
+     "type": "exists",
+     "path": "README.ja.md"
+    },
+    {
+     "type": "exists",
+     "path": "README.ko.md"
+    },
+    {
+     "type": "exists",
+     "path": "README.es.md"
+    },
+    {
+     "type": "exists",
+     "path": "README.fr.md"
+    },
+    {
+     "type": "exists",
+     "path": "README.de.md"
+    },
+    {
+     "type": "exists",
+     "path": "README.pt.md"
+    },
+    {
+     "type": "exists",
+     "path": "README.ru.md"
+    },
+    {
+     "type": "exists",
+     "path": "README.ar.md"
+    },
+    {
+     "type": "each",
+     "glob": "README*.md",
+     "pattern": "previews/header\\.jpg"
+    },
+    {
+     "type": "each",
+     "glob": "README*.md",
+     "pattern": "previews/families/trochilidae\\.jpg"
+    },
+    {
+     "type": "each",
+     "glob": "README*.md",
+     "pattern": "previews/orders\\.jpg"
+    },
+    {
+     "type": "each",
+     "glob": "README*.md",
+     "pattern": "<details><summary>"
+    },
+    {
+     "type": "each",
+     "glob": "README*.md",
+     "pattern": "git sparse-checkout set data"
+    },
+    {
+     "type": "contains",
+     "path": "README.zh-Hans.md",
+     "pattern": "## 画廊[\\s\\S]*## 里面有什么[\\s\\S]*## 覆盖情况[\\s\\S]*## 照片怎么选的，质量如何[\\s\\S]*## 署名与撤下[\\s\\S]*## 怎么用[\\s\\S]*## 致谢"
+    },
+    {
+     "type": "exists",
+     "path": "previews/credits.json"
+    }
+   ]
   }
  ],
  "manual": [
@@ -586,5 +671,29 @@
   "首页图片能加载，勾选“并排显示”后出现花叔贴纸",
   "语言菜单能切到同一种鸟的其他语言页面"
  ],
- "changes": []
+ "changes": [
+  "2026-11-06：第 6 项三次报失败（花叔发布 2.2.7、3abd6f6、8f28a08），每次用 scripts/rebuild_all.sh 按新数据重建后通过。",
+  "2026-11-06：新增第 11、12 项，对标花叔 data/ 的文件和字段标准。",
+  "2026-11-07：新增第 13 项，对标花叔仓库介绍：11 种语言 README、头图、画廊和同样的章节。"
+ ],
+ "manualResults": [
+  {
+   "check": "没有横向滚动",
+   "where": "首页、林鳽物种页、俄语方法页，375×812",
+   "result": "通过",
+   "date": "2026-11-06"
+  },
+  {
+   "check": "图片加载，勾选“并排显示”后出现花叔贴纸",
+   "where": "首页 375 宽，60 张卡片都切换为并排",
+   "result": "通过",
+   "date": "2026-11-06"
+  },
+  {
+   "check": "语言菜单切到同一种鸟的其他语言页面",
+   "where": "林鳽页切日语，链接到 /ja/birds/forest-bittern/",
+   "result": "通过",
+   "date": "2026-11-06"
+  }
+ ]
 }

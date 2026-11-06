@@ -120,6 +120,11 @@ def main():
         lines.append(f"| {i} | {item['title']} | **{verdict}** | {ev} |")
     total = len(spec["items"])
     lines += ["", f"{total - failed - unknown} of {total} items pass, {failed} fail, {unknown} unknown."]
+    if spec.get("manualResults"):  # checks done by a person in a browser, recorded in the checklist so they survive re-runs
+        lines += ["", "## Manual checks", "", "| Check | Where | Result | Date |", "|---|---|---|---|"]
+        lines += [f"| {m['check']} | {m['where']} | {m['result']} | {m.get('date', '')} |" for m in spec["manualResults"]]
+    if spec.get("changes"):
+        lines += ["", "## Changes", ""] + [f"- {c}" for c in spec["changes"]]
     report = "\n".join(lines) + "\n"
     print(report)
     if out:

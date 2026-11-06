@@ -24,7 +24,7 @@ description: 对标监督：把“我们和对标产品差在哪”写成一张�
    ```
    退出码 0 表示全部通过，1 表示有失败项。
 3. **逐项修。** 从 FAIL 的项开始，一次改一项，改完重跑。
-4. **人工项。** 清单里 `manual` 的项（比如手机上有没有横向滚动、图片是否加载），在浏览器里实际看，结果写进 `PARITY.md` 的末尾，写明看了哪个页面、什么尺寸。
+4. **人工项。** 清单里 `manual` 的项（比如手机上有没有横向滚动、图片是否加载），在浏览器里实际看，结果写进 `parity.json` 的 `manualResults`（`check`、`where`、`result`、`date`），检查脚本会把它们印进报告，重跑也不会丢。
 5. **交付。** 把最终的 `PARITY.md` 连同改动一起提交。汇报时列出：通过几项、失败几项、未知几项、人工检查结果。
 
 ## 清单格式
@@ -52,4 +52,4 @@ description: 对标监督：把“我们和对标产品差在哪”写成一张�
 
 ## 示例
 
-`examples/bird-human-picks.parity.json` 是人选鸟图对标花叔 birdalbum.com 的清单，共 12 项。
+`examples/bird-human-picks.parity.json` 是人选鸟图对标花叔 birdalbum.com 的清单，共 13 项。
