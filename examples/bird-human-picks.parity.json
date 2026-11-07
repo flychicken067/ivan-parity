@@ -511,72 +511,72 @@
      "path": "data/coverage.json",
      "key": "count",
      "op": "ge",
-     "value": 1209
+     "value": 1000
     },
     {
      "type": "contains",
      "path": "data/coverage.json",
-     "pattern": "\"photo.page\": 1209"
+     "pattern": "\"count\": (\\d+),[\\s\\S]*\"photo\\.page\": \\1\\b"
     },
     {
      "type": "contains",
      "path": "data/coverage.json",
-     "pattern": "\"photo.url\": 1209"
+     "pattern": "\"count\": (\\d+),[\\s\\S]*\"photo\\.url\": \\1\\b"
     },
     {
      "type": "contains",
      "path": "data/coverage.json",
-     "pattern": "\"photo.width\": 1209"
+     "pattern": "\"count\": (\\d+),[\\s\\S]*\"photo\\.width\": \\1\\b"
     },
     {
      "type": "contains",
      "path": "data/coverage.json",
-     "pattern": "\"photo.height\": 1209"
+     "pattern": "\"count\": (\\d+),[\\s\\S]*\"photo\\.height\": \\1\\b"
     },
     {
      "type": "contains",
      "path": "data/coverage.json",
-     "pattern": "\"photo.authorUrl\": 1209"
+     "pattern": "\"count\": (\\d+),[\\s\\S]*\"photo\\.authorUrl\": \\1\\b"
     },
     {
      "type": "contains",
      "path": "data/coverage.json",
-     "pattern": "\"photo.license\": 1209"
+     "pattern": "\"count\": (\\d+),[\\s\\S]*\"photo\\.license\": \\1\\b"
     },
     {
      "type": "contains",
      "path": "data/coverage.json",
-     "pattern": "\"photo.licenseUrl\": 1209"
+     "pattern": "\"count\": (\\d+),[\\s\\S]*\"photo\\.licenseUrl\": \\1\\b"
     },
     {
      "type": "contains",
      "path": "data/coverage.json",
-     "pattern": "\"photo.observation\": 1209"
+     "pattern": "\"count\": (\\d+),[\\s\\S]*\"photo\\.observation\": \\1\\b"
     },
     {
      "type": "contains",
      "path": "data/coverage.json",
-     "pattern": "\"evidence.agreeingIdentifiers\": 1209"
+     "pattern": "\"count\": (\\d+),[\\s\\S]*\"evidence\\.agreeingIdentifiers\": \\1\\b"
     },
     {
      "type": "contains",
      "path": "data/coverage.json",
-     "pattern": "\"evidence.identificationMonths\": 1209"
+     "pattern": "\"count\": (\\d+),[\\s\\S]*\"evidence\\.identificationMonths\": \\1\\b"
     },
     {
      "type": "contains",
      "path": "data/coverage.json",
-     "pattern": "\"checks.framing\": 1209"
+     "pattern": "\"count\": (\\d+),[\\s\\S]*\"checks\\.framing\": \\1\\b"
     },
     {
      "type": "contains",
      "path": "data/coverage.json",
-     "pattern": "\"checks.eyeCheck\": 1209"
+     "pattern": "\"count\": (\\d+),[\\s\\S]*\"checks\\.eyeCheck\": \\1\\b"
     },
     {
      "type": "contains",
      "path": "data/coverage.json",
-     "pattern": "\"ids.inaturalist\": 1209"
+     "pattern": "\"count\": (\\d+),[\\s\\S]*\"ids\\.inaturalist\": \\1\\b"
     }
    ]
   },
@@ -664,6 +664,43 @@
      "path": "previews/credits.json"
     }
    ]
+  },
+  {
+   "id": "writing",
+   "title": "中文文字按花叔写法：中文和数字之间不加空格，开头先交代作者，坏消息给数字",
+   "from": "ivan-huashu-writing 规则 F1、S1、W2",
+   "checks": [
+    {
+     "type": "none",
+     "glob": "README.zh-Han*.md",
+     "pattern": "[一-鿿] [0-9]|[0-9] [一-鿿]"
+    },
+    {
+     "type": "none",
+     "glob": "docs/index.html",
+     "pattern": "[一-鿿] [0-9]|[0-9] [一-鿿]"
+    },
+    {
+     "type": "none",
+     "glob": "docs/birds/*/index.html",
+     "pattern": "[一-鿿] [0-9]+ ?[一-鿿]"
+    },
+    {
+     "type": "contains",
+     "path": "README.zh-Hans.md",
+     "pattern": "\\n\\[Ivan\\]\\(https://github\\.com/flychicken067\\)开源的"
+    },
+    {
+     "type": "contains",
+     "path": "README.zh-Hans.md",
+     "pattern": "\\*\\*还有[0-9]+种没有入选。\\*\\*"
+    },
+    {
+     "type": "contains",
+     "path": "README.md",
+     "pattern": "\\nBy \\[Ivan\\]\\(https://github\\.com/flychicken067\\)"
+    }
+   ]
   }
  ],
  "manual": [
@@ -674,7 +711,9 @@
  "changes": [
   "2026-11-06：第 6 项三次报失败（花叔发布 2.2.7、3abd6f6、8f28a08），每次用 scripts/rebuild_all.sh 按新数据重建后通过。",
   "2026-11-06：新增第 11、12 项，对标花叔 data/ 的文件和字段标准。",
-  "2026-11-07：新增第 13 项，对标花叔仓库介绍：11 种语言 README、头图、画廊和同样的章节。"
+  "2026-11-07：新增第 13 项，对标花叔仓库介绍：11 种语言 README、头图、画廊和同样的章节。",
+  "2026-11-07：新增第 14 项，按 ivan-huashu-writing 检查中文写法；README、网站、App 文字逐字改过。",
+  "2026-11-07：按HN上的批评收紧「3人认定」（不算上传者、不算AI建议），入选从1209种变为1049种；第12项改为和数据集自身的条数比较，不再写死1209。"
  ],
  "manualResults": [
   {
